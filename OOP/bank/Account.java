@@ -1,3 +1,5 @@
+package bank;
+
 /*
 ABSTRACTION
 An abstract class serves as a template. It cannot be instantiated directly (cannot do `new Account()`).

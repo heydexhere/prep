@@ -1,3 +1,5 @@
+package bank;
+
 //INHERITANCE: 'extends' allows SavingsAccount to reuse fields and methods from Account.
 public class SavingsAccount extends Account {
 
