@@ -1,0 +1,106 @@
+================================================================================
+               OBJECT RELATIONSHIPS IN OOP 
+================================================================================
+
+This guide focuses on how classes and objects relate to each other. While the
+"4 Pillars" (Abstraction, Encapsulation, Inheritance, Polymorphism) are the 
+building blocks of OOP, Object Relationships are the design rules used to 
+connect them correctly.
+
+--------------------------------------------------------------------------------
+                  CONCEPTUAL BREAKDOWN: IS-A vs. HAS-A
+--------------------------------------------------------------------------------
+
+1. IS-A RELATIONSHIP (Inheritance)
+   * What it is: A relationship where a child class is a specialized type of the
+     parent class.
+   * Keyword in Java: `extends` (for classes) or `implements` (for interfaces).
+   * Example: A `SavingsAccount` IS-A `Account`. A `Dog` IS-A `Animal`.
+
+2. HAS-A RELATIONSHIP (Association)
+   * What it is: A relationship where one class contains or uses an instance of
+     another class.
+   * How it looks in Java: Declared as an instance variable (field) inside a class.
+   * Example: A `Bank` HAS-A `Account`. A `Car` HAS-A `Engine`.
+
+--------------------------------------------------------------------------------
+                     THE TWO FLAVORS OF HAS-A (ASSOCIATION)
+--------------------------------------------------------------------------------
+
+We break the HAS-A relationship into two types based on ownership and lifetime:
+
+1. AGGREGATION (Weak HAS-A Relationship)
+   * Definition: The parent and child objects can exist independently. If the
+     parent object is destroyed, the child object still survives.
+   * Real-World Example: A School and a Student. If the School is closed down,
+     the Student does not cease to exist. They can join another school.
+   * Code Example:
+     ```java
+     class Student { String name; }
+     class School {
+         private List<Student> students; // Aggregation
+     }
+     ```
+
+2. COMPOSITION (Strong HAS-A Relationship)
+   * Definition: The child object's lifetime is entirely dependent on the parent.
+     If the parent object is destroyed, the child object is also destroyed.
+   * Real-World Example: A House and a Room. If you demolish the House, the
+     Rooms are also destroyed.
+   * Code Example:
+     ```java
+     class Room { String type; }
+     class House {
+         private final Room kitchen; // Composition (created and destroyed with House)
+         public House() {
+             this.kitchen = new Room("Kitchen"); 
+         }
+     }
+     ```
+
+--------------------------------------------------------------------------------
+                 TOP INTERVIEW QUESTIONS ON OBJECT RELATIONSHIPS
+--------------------------------------------------------------------------------
+
+Q1: What is the difference between Inheritance (IS-A) and Composition (HAS-A)?
+    When should you use which?
+--------------------------------------------------------------------------------
+* Answer:
+  - Inheritance (IS-A) is a tight relationship. The subclass inherits everything
+    from the parent. It is static (cannot be changed at runtime).
+  - Composition (HAS-A) is a loose relationship. One class simply holds a reference
+    to another class.
+  - Rule of Thumb: "Favor Composition over Inheritance." Use Inheritance only 
+    when the relationship is strictly hierarchical (e.g., `SavingsAccount` IS-A 
+    `Account`). Use Composition when you want to build complex behaviors by 
+    combining smaller components (e.g., `Car` HAS-A `Engine`). This keeps code 
+    flexible and easier to modify.
+
+Q2: Why is it bad to design a Car class as "class Car extends Engine"?
+--------------------------------------------------------------------------------
+* Answer:
+  - This is a violation of the IS-A principle. A Car is not a type of Engine.
+  - If we extend Engine:
+    1. The Car inherits all of Engine's internals, exposing methods it shouldn't.
+    2. We cannot change the engine at runtime (e.g., swapping a Petrol Engine for 
+       an Electric Engine) because inheritance is resolved at compile-time.
+  - Correct Design: Car HAS-A Engine. We declare `private Engine engine` inside 
+    the Car class.
+
+Q3: What is the main difference between Aggregation and Composition?
+--------------------------------------------------------------------------------
+* Answer:
+  - The main difference is lifetime dependency.
+  - In Aggregation, objects have independent lifetimes (e.g., School and Student).
+  - In Composition, the child object cannot exist without the parent object 
+    (e.g., House and Room).
+
+Q4: How does Java handle multiple inheritance (IS-A relationships)?
+--------------------------------------------------------------------------------
+* Answer:
+  - Java does not support multiple inheritance with classes (e.g., `class C extends A, B` 
+    is invalid) to prevent the "Diamond Problem" (ambiguity when two parent classes 
+    have a method with the same signature).
+  - However, Java supports multiple inheritance of type using Interfaces. A class 
+    can implement multiple interfaces (e.g., `class C implements InterfaceA, InterfaceB`).
+================================================================================

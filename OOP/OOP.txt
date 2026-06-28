@@ -1,0 +1,45 @@
+OOP -
+It is a programming style where we organize code around objects that bundle both data (variables) and functions (methods) together. 
+This makes code easier to organize, reuse, and secure by controlling how the data is accessed.
+
+1. PROCEDURAL VS. OOP (OBJECT-ORIENTED PROGRAMMING)
+--------------------------------------------------
+* Procedural: Program is divided into functions. Data moves freely; no data hiding.
+  No inheritance or overloading. (e.g., C, Pascal, Fortran)
+* OOP: Program is divided into objects. Focuses on data security and data hiding.
+  Supports overloading, inheritance, and reusability. (e.g., Java, C#, Python)
+
+2. CLASSES AND OBJECTS
+----------------------
+* Object: A real-world entity (e.g., Dog, Car, ATM) that has:
+  1. State/Properties: (e.g., Dog's age; Account's balance)
+  2. Behavior/Function: (e.g., Dog barks; Account's deposit())
+* Class: A blueprint or skeleton of an object. You write a class first to define
+  the structure, and then create multiple objects from it (e.g., `Account savings = new SavingsAccount();`).
+
+3. THE 4 PILLARS OF OOP
+-----------------------
+A. ABSTRACTION (Hiding implementation, showing essential features)
+   * One-liner: "Show the user *what* the system does, but hide *how* it does it."
+   * Real-world: You press the car brake pedal to stop, but the internal mechanics are hidden.
+   * Bank Example: The abstract method `addInterest()` defines *what* happens, but its implementation details are hidden in `Account` and defined specifically in `SavingsAccount`.
+
+B. ENCAPSULATION (Data-binding & Hiding)
+   * One-liner: "Bundling data (variables) and behavior (methods) into a single unit, and restricting direct access."
+   * Bank Example: `private double balance` is protected. It cannot be modified directly (e.g., `savings.balance = -100`) but only via the `deposit()` method.
+
+C. INHERITANCE (Code Reusability)
+   * One-liner: "The mechanism where a child class acquires the properties and behaviors of a parent class."
+   * Bank Example: `SavingsAccount` and `CurrentAccount` inherit `deposit()` and `getBalance()` from the parent `Account` class to reuse code.
+   * Types: Single, Multilevel, Hierarchical.
+   * Java Note: Multiple inheritance (Class C extending A and B) is NOT supported due to the "Diamond Problem". Java resolves this using Interfaces.
+
+D. POLYMORPHISM (Many Forms)
+   * One-liner: "A single method performing different actions under different circumstances."
+   * Bank Example (Overriding): Calling `addInterest()` runs different logic for `SavingsAccount` (adds $20) vs `CurrentAccount` (adds $50) based on the object type at runtime.
+   * 2 Types:
+     1. Compile-Time (Static) / Method Overloading:
+        - Same method name but different parameter list inside the same class (e.g., `deposit(double amount)` vs `deposit(double amount, String note)`).
+     2. Run-Time (Dynamic) / Method Overriding:
+        - Same method signature in child class as parent class. Resolved by JVM at runtime based on the actual object type.
+

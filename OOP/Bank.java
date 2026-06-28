@@ -2,8 +2,10 @@ public class Bank {
     public static void main(String[] args) {
 
         /*
-         * Account - Reference Type - compiler sees this
-         * SavingsAccount - Object Type - JVMexecutes at runtime
+         * POLYMORPHISM (Upcasting):
+         * - Reference Type (Account) determines what methods the compiler lets you
+         * call.
+         * - Object Type (SavingsAccount) determines what version runs at runtime.
          */
         Account savings = new SavingsAccount();
         Account current = new CurrentAccount();
@@ -11,6 +13,12 @@ public class Bank {
         savings.deposit(100);
         current.deposit(100);
 
+        /*
+         * POLYMORPHISM (Runtime/Dynamic Polymorphism):
+         * Even though both variables are of type 'Account', the JVM automatically runs
+         * SavingsAccount's addInterest() for the first, and CurrentAccount's for the
+         * second.
+         */
         savings.addInterest();
         current.addInterest();
 
